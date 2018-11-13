@@ -31,8 +31,6 @@ import be.yildizgames.module.graphic.gui.Zorder;
 import be.yildizgames.module.graphic.gui.button.Button;
 import be.yildizgames.module.graphic.gui.textline.TextLine;
 
-import java.io.Closeable;
-
 /**
  * Menu used for close confirmation.
  *
@@ -66,13 +64,13 @@ public final class CloseMenu extends Window {
     public CloseMenu(CloseMenuTemplate template, GraphicEngine engine, Engine runner) {
         super(
                 engine
-                        .getGuiBuilder()
+                        .getGuiFactory()
                         .container()
                         .withName("close_menu")
                         .withBackground(template.getCloseMenuBackground())
                         .withSize(template.getCloseMenuSize())
                         .build(),
-                engine.getGuiBuilder(),
+                engine.getGuiFactory(),
                 template.getCloseMenuFont(),
                 new Zorder(620),
                 engine.getEventManager(),
@@ -80,9 +78,9 @@ public final class CloseMenu extends Window {
                 Parameter.NOT_MOVABLE);
         this.setPosition(template.getPosition());
         this.locale = template.getLocale();
-        this.title = engine.getGuiBuilder().textLine(this.getContainer(), template.getTitleTemplate(), this.locale.getTitle());
-        this.ok = engine.getGuiBuilder().button(this.getContainer(), template.getButtonTemplate(), runner::stop);
-        this.cancel = engine.getGuiBuilder().button(this.getContainer(), template.getButtonTemplate(), this::hide);
+        this.title = engine.getGuiFactory().textLine(this.getContainer(), template.getTitleTemplate(), this.locale.getTitle());
+        this.ok = engine.getGuiFactory().button(this.getContainer(), template.getButtonTemplate(), runner::stop);
+        this.cancel = engine.getGuiFactory().button(this.getContainer(), template.getButtonTemplate(), this::hide);
         this.hide();
     }
 

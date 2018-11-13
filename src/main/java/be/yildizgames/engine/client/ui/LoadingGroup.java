@@ -82,15 +82,15 @@ public final class LoadingGroup {
         this.engine = engine;
         this.toLoad = new ArrayList<>();
 
-        Container container = engine.getGuiBuilder()
+        Container container = engine.getGuiFactory()
                 .container()
                 .withName("loading")
                 .fullScreen()
                 .build();
-        this.text = engine.getGuiBuilder()
+        this.text = engine.getGuiFactory()
                 .textLine()
                 .withName("loadText")
-                .withCoordinates(new Coordinates(new Size(container.getWidth(), 20), new Position(0, engine.getGuiBuilder().getScreenSize().height >> 1)))
+                .withCoordinates(new Coordinates(new Size(container.getWidth(), 20), new Position(0, engine.getGuiFactory().getScreenSize().height >> 1)))
                 .withFont(font)
                 .build(container)
                 .setText(TranslationKey.get(message));
@@ -103,9 +103,9 @@ public final class LoadingGroup {
      */
     public void load() {
         this.window.show();
-        this.engine.update();
+        //this.engine.update();
         for (final Resource r : this.toLoad) {
-            this.engine.update();
+            //this.engine.update();
             r.load();
         }
         this.toLoad.clear();
