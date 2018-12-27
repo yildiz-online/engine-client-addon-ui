@@ -79,8 +79,18 @@ public final class CloseMenu extends Window {
         this.setPosition(template.getPosition());
         this.locale = template.getLocale();
         this.title = engine.getGuiFactory().textLine(this.getContainer(), template.getTitleTemplate(), this.locale.getTitle());
-        this.ok = engine.getGuiFactory().button(this.getContainer(), template.getButtonTemplate(), runner::stop);
-        this.cancel = engine.getGuiFactory().button(this.getContainer(), template.getButtonTemplate(), this::hide);
+        this.ok = engine.getGuiFactory()
+                .button()
+                .withButtonMaterial(template.getButtonTemplate().getButtonMaterial())
+                .withCoordinates(template.getButtonTemplate().getCoordinates())
+                .onClick(runner::stop)
+                .build(this.getContainer());
+        this.cancel = engine.getGuiFactory()
+                .button()
+                .withButtonMaterial(template.getButtonTemplate().getButtonMaterial())
+                .withCoordinates(template.getButtonTemplate().getCoordinates())
+                .onClick(this::hide)
+                .build(this.getContainer());
         this.hide();
     }
 
