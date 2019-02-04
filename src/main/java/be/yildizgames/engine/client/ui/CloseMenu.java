@@ -24,12 +24,12 @@
  */
 package be.yildizgames.engine.client.ui;
 
-import be.yildizgames.common.util.Engine;
 import be.yildizgames.module.graphic.GraphicEngine;
 import be.yildizgames.module.graphic.gui.Window;
 import be.yildizgames.module.graphic.gui.Zorder;
 import be.yildizgames.module.graphic.gui.button.Button;
 import be.yildizgames.module.graphic.gui.textline.TextLine;
+import be.yildizgames.module.window.input.MouseLeftClickListener;
 
 /**
  * Menu used for close confirmation.
@@ -61,7 +61,7 @@ public final class CloseMenu extends Window {
     /**
      * Full constructor.
      */
-    public CloseMenu(CloseMenuTemplate template, GraphicEngine engine, Engine runner) {
+    public CloseMenu(CloseMenuTemplate template, GraphicEngine engine, MouseLeftClickListener callback) {
         super(
                 engine
                         .getGuiFactory()
@@ -83,7 +83,7 @@ public final class CloseMenu extends Window {
                 .button()
                 .withButtonMaterial(template.getButtonTemplate().getButtonMaterial())
                 .withCoordinates(template.getButtonTemplate().getCoordinates())
-                .onClick(runner::stop)
+                .onClick(callback)
                 .build(this.getContainer());
         this.cancel = engine.getGuiFactory()
                 .button()
