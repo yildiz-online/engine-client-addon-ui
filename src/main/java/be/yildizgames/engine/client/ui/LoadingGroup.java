@@ -33,9 +33,6 @@ import be.yildizgames.module.coordinate.Size;
 import be.yildizgames.module.graphic.Font;
 import be.yildizgames.module.graphic.GraphicEngine;
 import be.yildizgames.module.graphic.gui.PositionRelativeLeft;
-import be.yildizgames.module.graphic.gui.SimpleView;
-import be.yildizgames.module.graphic.gui.View;
-import be.yildizgames.module.graphic.gui.Zorder;
 import be.yildizgames.module.graphic.gui.container.Container;
 import be.yildizgames.module.graphic.gui.textline.TextLine;
 import be.yildizgames.module.graphic.material.Material;
@@ -58,7 +55,7 @@ public final class LoadingGroup {
     /**
      * View to display the loading screen.
      */
-    private final View window;
+    private final Container window;
 
     /**
      * Text line.
@@ -82,7 +79,7 @@ public final class LoadingGroup {
         this.engine = engine;
         this.toLoad = new ArrayList<>();
 
-        Container container = engine.getGuiFactory()
+        this.window = engine.getGuiFactory()
                 .container()
                 .withName("loading")
                 .fullScreen()
@@ -90,12 +87,11 @@ public final class LoadingGroup {
         this.text = engine.getGuiFactory()
                 .textLine()
                 .withName("loadText")
-                .withCoordinates(new Coordinates(new Size(container.getWidth(), 20), new Position(0, engine.getGuiFactory().getScreenSize().height >> 1)))
+                .withCoordinates(new Coordinates(new Size(window.getWidth(), 20), new Position(0, engine.getGuiFactory().getScreenSize().height >> 1)))
                 .withFont(font)
-                .build(container)
+                .build(window)
                 .setText(TranslationKey.get(message));
         this.text.setLeftFromParent(PositionRelativeLeft.CENTER);
-        this.window = new SimpleView(container, new Zorder(10), engine.getScreenSize());
     }
 
     /**
@@ -134,7 +130,7 @@ public final class LoadingGroup {
      * @param material Background material.
      */
     public void setBackground(final Material material) {
-        this.window.setBackground(material);
+        this.window.setMaterial(material);
     }
 
     /**
@@ -144,12 +140,5 @@ public final class LoadingGroup {
      */
     public void setFont(final Font font) {
         this.text.setFont(font);
-    }
-
-    /**
-     * Delete the window.
-     */
-    public void delete() {
-        this.window.delete();
     }
 }

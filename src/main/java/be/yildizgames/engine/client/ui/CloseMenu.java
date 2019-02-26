@@ -25,9 +25,8 @@
 package be.yildizgames.engine.client.ui;
 
 import be.yildizgames.module.graphic.GraphicEngine;
-import be.yildizgames.module.graphic.gui.Window;
-import be.yildizgames.module.graphic.gui.Zorder;
 import be.yildizgames.module.graphic.gui.button.Button;
+import be.yildizgames.module.graphic.gui.container.Container;
 import be.yildizgames.module.graphic.gui.textline.TextLine;
 import be.yildizgames.module.window.input.MouseLeftClickListener;
 
@@ -36,12 +35,14 @@ import be.yildizgames.module.window.input.MouseLeftClickListener;
  *
  * @author Van den Borre Grégory
  */
-public final class CloseMenu extends Window {
+public final class CloseMenu {
 
     /**
      * Notification text.
      */
     private final TextLine title;
+
+    private final Container container;
 
     /**
      * GuiButton to confirm to close the game.
@@ -62,36 +63,29 @@ public final class CloseMenu extends Window {
      * Full constructor.
      */
     public CloseMenu(CloseMenuTemplate template, GraphicEngine engine, MouseLeftClickListener callback) {
-        super(
-                engine
+        super();
+        this.container = engine
                         .getGuiFactory()
                         .container()
                         .withName("close_menu")
                         .withBackground(template.getCloseMenuBackground())
                         .withSize(template.getCloseMenuSize())
-                        .build(),
-                engine.getGuiFactory(),
-                template.getCloseMenuFont(),
-                new Zorder(620),
-                engine.getEventManager(),
-                Parameter.NO_TITLE_BAR,
-                Parameter.NOT_MOVABLE);
-        this.setPosition(template.getPosition());
+                        .build();
         this.locale = template.getLocale();
-        this.title = engine.getGuiFactory().textLine(this.getContainer(), template.getTitleTemplate(), this.locale.getTitle());
+        this.title = engine.getGuiFactory().textLine(this.container, template.getTitleTemplate(), this.locale.getTitle());
         this.ok = engine.getGuiFactory()
                 .button()
                 .withButtonMaterial(template.getButtonTemplate().getButtonMaterial())
                 .withCoordinates(template.getButtonTemplate().getCoordinates())
                 .onClick(callback)
-                .build(this.getContainer());
+                .build(this.container);
         this.cancel = engine.getGuiFactory()
                 .button()
                 .withButtonMaterial(template.getButtonTemplate().getButtonMaterial())
                 .withCoordinates(template.getButtonTemplate().getCoordinates())
-                .onClick(this::hide)
-                .build(this.getContainer());
-        this.hide();
+                .onClick(this.container::hide)
+                .build(this.container);
+        this.container.hide();
     }
 
     /**
@@ -99,7 +93,7 @@ public final class CloseMenu extends Window {
      */
     public void showConnectionLost() {
         this.connectionLostOpen = true;
-        this.show();
+        this.container.show();
         this.cancel.hide();
         this.ok.setPosition(100, 130);
         this.title.setText(this.locale.getConnectionLost());
@@ -110,28 +104,8 @@ public final class CloseMenu extends Window {
      */
     public void showQuitGame() {
         if (!this.connectionLostOpen) {
-            this.setActive(true);
-            this.show();
+         //   this.container.setActive();
+            this.container.show();
         }
-    }
-
-    /**
-     * Empty implementation.
-     *
-     * @param show Unused.
-     */
-    @Override
-    protected void setVisibleImpl(final boolean show) {
-        //Does nothing
-    }
-
-    /**
-     * Empty implementation.
-     *
-     * @param active Unused.
-     */
-    @Override
-    protected void setActiveImpl(final boolean active) {
-        //Does nothing
     }
 }
