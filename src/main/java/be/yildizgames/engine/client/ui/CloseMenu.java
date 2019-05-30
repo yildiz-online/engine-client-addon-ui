@@ -24,6 +24,9 @@
  */
 package be.yildizgames.engine.client.ui;
 
+import be.yildizgames.module.coordinate.BaseCoordinate;
+import be.yildizgames.module.coordinate.Coordinates;
+import be.yildizgames.module.coordinate.Size;
 import be.yildizgames.module.graphic.GraphicEngine;
 import be.yildizgames.module.graphic.gui.Window;
 import be.yildizgames.module.graphic.gui.Zorder;
@@ -79,16 +82,19 @@ public final class CloseMenu extends Window {
         this.setPosition(template.getPosition());
         this.locale = template.getLocale();
         this.title = engine.getGuiFactory().textLine(this.getContainer(), template.getTitleTemplate(), this.locale.getTitle());
+        Size size = new Size(template.getButtonTemplate().getCoordinates());
         this.ok = engine.getGuiFactory()
                 .button()
                 .withButtonMaterial(template.getButtonTemplate().getButtonMaterial())
-                .withCoordinates(template.getButtonTemplate().getCoordinates())
+                .withSize(size)
+                .atPosition(10, template.getCloseMenuSize().height - size.height - 10)
                 .onClick(callback)
                 .build(this.getContainer());
         this.cancel = engine.getGuiFactory()
                 .button()
                 .withButtonMaterial(template.getButtonTemplate().getButtonMaterial())
-                .withCoordinates(template.getButtonTemplate().getCoordinates())
+                .withSize(size)
+                .atPosition(template.getCloseMenuSize().width - size.width - 10, template.getCloseMenuSize().height - size.height - 10)
                 .onClick(this::hide)
                 .build(this.getContainer());
         this.hide();
