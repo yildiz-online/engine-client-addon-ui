@@ -87,6 +87,7 @@ public final class CloseMenu extends Window {
                 .button()
                 .withButtonMaterial(template.getButtonTemplate().getButtonMaterial())
                 .withSize(size)
+                .withCaptionText("Ok")
                 .atPosition(10, template.getCloseMenuSize().height - size.height - 10)
                 .onClick(callback)
                 .build(this.getContainer());
@@ -94,6 +95,7 @@ public final class CloseMenu extends Window {
                 .button()
                 .withButtonMaterial(template.getButtonTemplate().getButtonMaterial())
                 .withSize(size)
+                .withCaptionText("No")
                 .atPosition(template.getCloseMenuSize().width - size.width - 10, template.getCloseMenuSize().height - size.height - 10)
                 .onClick(this::hide)
                 .build(this.getContainer());
