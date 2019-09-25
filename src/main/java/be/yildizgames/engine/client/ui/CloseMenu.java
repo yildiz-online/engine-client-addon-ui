@@ -24,8 +24,6 @@
  */
 package be.yildizgames.engine.client.ui;
 
-import be.yildizgames.module.coordinate.BaseCoordinate;
-import be.yildizgames.module.coordinate.Coordinates;
 import be.yildizgames.module.coordinate.Size;
 import be.yildizgames.module.graphic.GraphicEngine;
 import be.yildizgames.module.graphic.gui.Window;
