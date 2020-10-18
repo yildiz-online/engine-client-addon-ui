@@ -26,7 +26,7 @@
   <modelVersion>4.0.0</modelVersion>
   <name>Yildiz Engine  Addon UI</name>
   <description>UI components addon for the Yildiz Engine Client.</description>
-  <url>https://bitbucket.org/yildiz-engine-team/engine-client-parser-xml</url>
+  <url>https://github.com/yildiz-online/engine-client-parser-xml</url>
 
   <artifactId>engine-client-addon-ui</artifactId>
   <version>2.1.2-SNAPSHOT</version>
@@ -34,9 +34,9 @@
   <packaging>jar</packaging>
   <inceptionYear>2019</inceptionYear>
   <scm>
-    <connection>scm:git:https://bitbucket.org/yildiz-engine-team/engine-client-addon-ui</connection>
-    <developerConnection>scm:git:https://bitbucket.org/yildiz-engine-team/engine-client-addon-ui</developerConnection>
-    <url>https://bitbucket.org/yildiz-engine-team/engine-client-addon-ui</url>
+    <connection>scm:git:https://github.com/yildiz-online/engine-client-addon-ui</connection>
+    <developerConnection>scm:git:https://github.com/yildiz-online/engine-client-addon-ui</developerConnection>
+    <url>https://github.com/yildiz-online/engine-client-addon-ui</url>
   </scm>
   <parent>
     <groupId>be.yildiz-games</groupId>
